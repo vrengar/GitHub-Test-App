@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Verify config.json
+      run: |
+        if [ ! -f config/config.json ]; then
+          echo "config.json is missing"
+          exit 1
+        fi
+        echo "config.json is present"
