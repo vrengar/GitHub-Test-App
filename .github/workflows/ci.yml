@@ -20,3 +20,20 @@ jobs:
           exit 1
         fi
         echo "config.json is present"
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Verify security roles
+      run: ./scripts/check_security_roles.sh
+
+    - name: Verify database tables
+      run: ./scripts/check_db_tables.sh
